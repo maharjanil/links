@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Links</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Arial', sans-serif;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-top: 50px;
+    }
+    h1 {
+      color: #333;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .search-box {
+      margin-bottom: 20px;
+    }
+    .search-box input {
+      border-radius: 25px;
+      padding: 10px 20px;
+      border: 2px solid #ddd;
+      width: 100%;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+    .search-box input:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+    .list-group-item {
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      padding: 15px 20px;
+      background-color: #f8f9fa;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      display: flex;
+      align-items: center;
+    }
+    .list-group-item:hover {
+      background-color: #e9ecef;
+      transform: translateX(5px);
+    }
+    .list-group-item i {
+      margin-right: 10px;
+      color: #007bff;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center">Links List</h1>
+
+    <!-- Search Box -->
+    <div class="search-box">
+      <input type="text" id="searchInput" class="form-control" placeholder="Search items...">
+    </div>
+
+    <!-- List of Items -->
+    <div class="list-group" id="itemList">
+      <div class="list-group-item" data-url="https://www.google.com">
+        <i class="fas fa-search"></i> Google
+      </div>
+      <div class="list-group-item" data-url="https://www.github.com">
+        <i class="fas fa-code"></i> GitHub
+      </div>
+      <div class="list-group-item" data-url="https://www.stackoverflow.com">
+        <i class="fas fa-question-circle"></i> Stack Overflow
+      </div>
+      <div class="list-group-item" data-url="https://www.youtube.com">
+        <i class="fas fa-play"></i> YouTube
+      </div>
+      <div class="list-group-item" data-url="https://www.wikipedia.org">
+        <i class="fas fa-book"></i> Wikipedia
+      </div>
+      <div class="list-group-item" data-url="https://www.reddit.com">
+        <i class="fas fa-comments"></i> Reddit
+      </div>
+       <div class="list-group-item" data-url="https://citizenportal.donidcr.gov.np/en/check-national-id-number">
+        <i class="fas fa-comments"></i> Check National ID Number (NIN)
+      </div>
+       <div class="list-group-item" data-url="https://citizenportal.donidcr.gov.np/en/check-nid-card-status">
+        <i class="fas fa-comments"></i> Check National ID Card Status
+      </div>
+    </div>
+  </div>
+
+  <!-- Font Awesome for Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <!-- Bootstrap 5 JS and Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  <!-- Custom JS -->
+  <script>
+    // Function to open links in a new tab
+    document.querySelectorAll('.list-group-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const url = item.getAttribute('data-url');
+        if (url) {
+          window.open(url, '_blank'); // Open link in a new tab
+        }
+      });
+    });
+
+    // Function to filter items based on search input
+    const filterItems = () => {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const items = document.querySelectorAll('#itemList .list-group-item');
+
+      items.forEach(item => {
+        const itemText = item.textContent.toLowerCase();
+        if (itemText.includes(searchTerm)) {
+          item.classList.remove('hidden'); // Show matching items
+        } else {
+          item.classList.add('hidden'); // Hide non-matching items
+        }
+      });
+    };
+
+    // Add event listener to search input for real-time filtering
+    document.getElementById('searchInput').addEventListener('input', filterItems);
+  </script>
+</body>
+</html>
